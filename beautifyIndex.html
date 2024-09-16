@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Sorting Example</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #4CAF50;
+        }
+        h2, h3 {
+            color: #4CAF50;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        label, input, button {
+            display: block;
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f7e9;
+            border-left: 5px solid #4CAF50;
+            border-radius: 5px;
+        }
+        #sortedArrayDisplay, #complexityDisplay {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .nav-btn {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .nav-btn a {
+            padding: 10px 20px;
+            background-color: #ff9800;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .nav-btn a:hover {
+            background-color: #e68900;
+        }
+    </style>
+    <script src="insertionSort.js" defer></script>
+    <script src="mergeSort.js" defer></script>
+    <script src="heapSort.js" defer></script>
+    <script src="shellSort.js" defer></script>
+    <script src="countingSort.js" defer></script>
+    <script src="bucketSort.js" defer></script>
+    <script src="bubbleSort.js" defer></script>
+    <script src="selectionSort.js" defer></script>
+    <script src="quickSort.js" defer></script>
+</head>
+<body>
+    <h1>自定义排序演示</h1>
+    <div class="container">
+        <label for="arrayInput">输入数组（逗号分隔）:</label>
+        <input type="text" id="arrayInput" placeholder="如：5, 2, 9, 1, 5, 6">
+        <p>若不输入，将使用默认数组：[5, 2, 9, 1, 5, 6]</p>
+
+        <h2>选择排序算法</h2>
+        <button id="insertionSortButton">插入排序</button>
+        <button id="mergeSortButton">归并排序</button>
+        <button id="heapSortButton">堆排序</button>
+        <button id="shellSortButton">希尔排序</button>
+        <button id="countingSortButton">计数排序</button>
+        <button id="bucketSortButton">桶排序</button>
+        <button id="bubbleSortButton">冒泡排序</button>
+        <button id="selectionSortButton">选择排序</button>
+        <button id="quickSortButton">快速排序</button>
+
+        <div class="result-container">
+            <h3>排序后的数组</h3>
+            <div id="sortedArrayDisplay">结果将显示在这里</div>
+
+            <h3>复杂度</h3>
+            <div id="complexityDisplay">复杂度信息将显示在这里</div>
+        </div>
+
+        <div class="nav-btn">
+            <a href="algorithm-summary.html" target="_blank">查看算法总结表</a>
+        </div>
+    </div>
+
+    <script>
+        const defaultArray = [5, 2, 9, 1, 5, 6];
+
+        function getArray() {
+            const input = document.getElementById("arrayInput").value;
+            return input.trim() ? input.split(",").map(Number) : defaultArray;
+        }
+
+        function displayResult(sortedArray, complexity) {
+            document.getElementById("sortedArrayDisplay").textContent = "排序结果: " + sortedArray.join(", ");
+            document.getElementById("complexityDisplay").textContent = 
+                `平均时间复杂度: ${complexity.average}, 最坏时间复杂度: ${complexity.worst}, 空间复杂度: ${complexity.space}`;
+        }
+
+        document.getElementById("insertionSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = insertionSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("mergeSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = mergeSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("heapSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = heapSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("shellSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = shellSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("countingSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = countingSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("bucketSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = bucketSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("bubbleSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = bubbleSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("selectionSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = selectionSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+
+        document.getElementById("quickSortButton").addEventListener("click", function() {
+            const array = getArray();
+            const result = quickSort(array);
+            displayResult(result.sortedArray, result.complexity);
+        });
+    </script>
+</body>
+</html>
